@@ -21,22 +21,34 @@ export default class extends Phaser.Scene {
     this.physics.world.bounds.width = this.groundLayer.width
     this.physics.world.bounds.height = this.groundLayer.height
 
-    this.player = this.add.existing(new Player(this, 200, 200))
+    const c1 = this.map.findObject('Player', (obj) => obj.name === '1')
+    const c2 = this.map.findObject('Player', (obj) => obj.name === '2')
+    const c3 = this.map.findObject('Player', (obj) => obj.name === '3')
+    this.player = this.add.existing(new Player(this, c1.x, c1.y))
+    this.activePlayer = this.player
+    this.player2 = this.add.existing(new Player(this, c2.x, c2.y))
+    this.player3 = this.add.existing(new Player(this, c3.x, c3.y))
 
     this.physics.add.collider(this.groundLayer, this.player)
+    this.physics.add.collider(this.groundLayer, this.player2)
+    this.physics.add.collider(this.groundLayer, this.player3)
 
     this.coinLayer.setTileIndexCallback(17, this.collectCoin, this)
     this.physics.add.overlap(this.player, this.coinLayer)
+    this.physics.add.overlap(this.player2, this.coinLayer)
+    this.physics.add.overlap(this.player3, this.coinLayer)
 
     this.cursors = this.input.keyboard.createCursorKeys()
-
+    this.spaceKey = this.input.keyboard.addKey('SPACE')
+    this.spaceKey.addListener('down', () => this.swap())
+    this.cameras.main.zoom = 0.5
     this.cameras.main.setBounds(
       0,
       0,
       this.map.widthInPixels,
       this.map.heightInPixels,
     )
-    this.cameras.main.startFollow(this.player)
+    this.cameras.main.startFollow(this.activePlayer)
     this.cameras.main.setBackgroundColor('#ccccff')
 
     this.text = this.add.text(20, 570, '0', {
@@ -46,16 +58,29 @@ export default class extends Phaser.Scene {
     this.text.setScrollFactor(0)
   }
 
+  swap() {
+    this.activePlayer.stop()
+
+    if (this.activePlayer === this.player) {
+      this.activePlayer = this.player2
+    } else if (this.activePlayer === this.player2) {
+      this.activePlayer = this.player3
+    } else if (this.activePlayer === this.player3) {
+      this.activePlayer = this.player
+    }
+    this.cameras.main.startFollow(this.activePlayer)
+  }
+
   update(time, delta) {
     if (this.cursors.left.isDown) {
-      this.player.walk(-300)
+      this.activePlayer.walk(-300)
     } else if (this.cursors.right.isDown) {
-      this.player.walk(300)
+      this.activePlayer.walk(300)
     } else {
-      this.player.stop()
+      this.activePlayer.stop()
     }
     if (this.cursors.up.isDown) {
-      this.player.jump()
+      this.activePlayer.jump()
     }
   }
 
