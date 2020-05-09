@@ -1,5 +1,6 @@
 import InputService from '../services/input'
 import LevelService from '../services/level'
+import { NUM_LEVELS } from '../constants'
 
 export default class extends Phaser.Scene {
   constructor() {
@@ -17,8 +18,8 @@ export default class extends Phaser.Scene {
     this.width = level.map.widthInPixels
     this.height = level.map.heightInPixels
 
-    this.physics.world.bounds.width = level.groundLayer.width
-    this.physics.world.bounds.height = level.groundLayer.height
+    this.physics.world.bounds.width = this.width
+    this.physics.world.bounds.height = this.height
     this.physics.add.collider(level.pushers, level.groundLayer)
     this.physics.add.collider(level.crates, level.players)
     this.physics.add.overlap(level.pushers, level.buttons, this.overlap)
@@ -37,7 +38,7 @@ export default class extends Phaser.Scene {
     const players = this.level.players.getChildren().filter((p) => p.visible)
     const activeIndex = players.findIndex((p) => p.alpha === 1)
     this.activePlayer.deactivate()
-    const nextIndex = activeIndex + 1 > players.length - 1 ? 0 : activeIndex + 1
+    const nextIndex = activeIndex + 1 >= players.length ? 0 : activeIndex + 1
     this.activePlayer = players[nextIndex]
     this.activePlayer.activate()
   }
@@ -49,7 +50,7 @@ export default class extends Phaser.Scene {
       this.level &&
       this.level.players.getChildren().every((p) => !p.visible)
     ) {
-      this.scene.start('Game', { levelNumber: this.levelNumber + 1 })
+      this.nextLevel()
     }
   }
 
@@ -58,6 +59,22 @@ export default class extends Phaser.Scene {
       if (obj.type === 'button') {
         this.level.toggleWalls(obj)
       }
+    })
+  }
+
+  nextLevel() {
+    if (this.levelNumber >= NUM_LEVELS) return
+    this.inputService.cleanup()
+    this.scene.start('Game', {
+      levelNumber: this.levelNumber + 1,
+    })
+  }
+
+  prevLevel() {
+    if (this.levelNumber === 1) return
+    this.inputService.cleanup()
+    this.scene.start('Game', {
+      levelNumber: this.levelNumber - 1,
     })
   }
 }

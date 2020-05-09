@@ -1,3 +1,5 @@
+import { NUM_LEVELS } from '../constants'
+
 export default class extends Phaser.Scene {
   constructor() {
     super({ key: 'Boot' })
@@ -15,9 +17,9 @@ export default class extends Phaser.Scene {
         60,
       )
     })
-
-    this.load.tilemapTiledJSON('map1', 'assets/maps/map1.json')
-    this.load.tilemapTiledJSON('map2', 'assets/maps/map2.json')
+    for (let i = 1; i <= NUM_LEVELS; i++) {
+      this.load.tilemapTiledJSON(`map${i}`, `assets/maps/map${i}.json`)
+    }
     this.load.spritesheet('tiles', 'assets/images/tiles.png', {
       frameWidth: 70,
       frameHeight: 70,

@@ -12,22 +12,25 @@ export default class InputService {
     this.spaceKey.addListener('down', () => this.scene.activePlayer.action())
     this.xKey.addListener('down', () => this.scene.swap())
     this.lastKey.addListener('down', () => {
-      if (this.scene.levelNumber === 1) return
-      this.scene.scene.start('Game', {
-        levelNumber: this.scene.levelNumber - 1,
-      })
+      this.scene.prevLevel()
     })
     this.nextKey.addListener('down', () => {
-      if (this.scene.levelNumber >= 2) return
-      this.scene.scene.start('Game', {
-        levelNumber: this.scene.levelNumber + 1,
-      })
+      this.scene.nextLevel()
     })
     this.rKey.addListener('down', () => {
       this.scene.scene.start('Game', { levelNumber: this.scene.levelNumber })
     })
 
     this.update = this.update.bind(this)
+  }
+
+  cleanup() {
+    this.nextKey.removeListener('down')
+    this.lastKey.removeListener('down')
+    this.rKey.removeListener('down')
+    this.xKey.removeListener('down')
+    this.spaceKey.removeListener('down')
+    this.zKey.removeListener('down')
   }
 
   update(time, delta) {

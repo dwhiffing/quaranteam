@@ -18,6 +18,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.activate = this.activate.bind(this)
     this.scene.add.existing(this)
     this.scene.physics.world.enable(this)
+    this.body.setMaxVelocity(600, 900)
     this.setAlpha(0.5)
     this.setCollideWorldBounds(true)
     this.body.useDamping = true
