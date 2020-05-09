@@ -9,12 +9,14 @@ const JUMPS = {
   blue: 900,
 }
 export class Player extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y, type) {
-    super(scene, x, y, 'player')
+  constructor(scene, object) {
+    super(scene, object.x, object.y, 'player')
     this.scene = scene
     this.walk = this.walk.bind(this)
     this.stop = this.stop.bind(this)
     this.action = this.action.bind(this)
+    this.activate = this.activate.bind(this)
+    this.scene.add.existing(this)
     this.scene.physics.world.enable(this)
     this.setAlpha(0.5)
     this.setCollideWorldBounds(true)
@@ -37,12 +39,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       frames: [{ key: 'player', frame: 'p1_stand' }],
       frameRate: 10,
     })
-    this.type = type
-    if (type === 'red') {
+    this.type = object.name
+    if (this.type === 'red') {
       this.setTint(0xff0000)
-    } else if (type === 'green') {
+    } else if (this.type === 'green') {
       this.setTint(0x00ff00)
-    } else if (type === 'blue') {
+    } else if (this.type === 'blue') {
       this.setTint(0x0000ff)
     }
   }
@@ -64,9 +66,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
   deactivate() {
     this.alpha = 0.5
+    this.stop()
   }
   activate() {
     this.alpha = 1
+    this.scene.cameras.main.startFollow(this)
   }
   update() {
     if (this.body.onFloor()) {

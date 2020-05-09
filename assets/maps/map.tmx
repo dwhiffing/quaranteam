@@ -99,9 +99,9 @@
   <object id="72" type="coin" gid="18" x="1087" y="1262.2" width="70" height="70"/>
   <object id="73" type="coin" gid="18" x="1157.38" y="1261.67" width="70" height="70"/>
   <object id="74" type="coin" gid="18" x="1226.85" y="1260.6" width="70" height="70"/>
-  <object id="75" type="switch" gid="27" x="377.121" y="483.485" width="70" height="70"/>
-  <object id="76" type="switch" gid="25" x="377.121" y="974.394" width="70" height="70"/>
-  <object id="77" type="switch" gid="26" x="377.121" y="1468.33" width="70" height="70"/>
+  <object id="75" type="button" gid="27" x="377.121" y="483.485" width="70" height="70"/>
+  <object id="76" type="button" gid="25" x="377.121" y="974.394" width="70" height="70"/>
+  <object id="77" type="button" gid="26" x="377.121" y="1468.33" width="70" height="70"/>
   <object id="78" type="crate" gid="5" x="280.152" y="486.515" width="70" height="70"/>
   <object id="79" type="exit" gid="31" x="1955.91" y="489.545" width="70" height="70"/>
   <object id="80" type="exit" gid="31" x="1955.91" y="980.455" width="70" height="70"/>
