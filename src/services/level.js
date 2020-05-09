@@ -66,7 +66,6 @@ export default class LevelService {
       callback: () => {
         tile.setCollision(true, true, true, true)
         tile.alpha = 1
-        button.isPressed = false
       },
     })
   }

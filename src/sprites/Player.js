@@ -1,5 +1,5 @@
 const SPEEDS = {
-  red: 300,
+  red: 400,
   green: 600,
   blue: 500,
 }

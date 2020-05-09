@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="70" tileheight="70" infinite="0" backgroundcolor="#ffffff" nextlayerid="8" nextobjectid="82">
+<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="70" tileheight="70" infinite="0" backgroundcolor="#ffffff" nextlayerid="8" nextobjectid="89">
  <editorsettings>
   <export target="map1.json" format="json"/>
  </editorsettings>
@@ -72,10 +72,9 @@
   </tile>
  </tileset>
  <tileset firstgid="17" name="objects" tilewidth="70" tileheight="70" tilecount="16" columns="4">
-  <image source="../images/tiles.png" width="280" height="280"/>
+  <image source="../images/objects.png" width="280" height="280"/>
  </tileset>
  <objectgroup id="7" name="Objects">
-  <object id="48" type="coin" gid="19" x="1189.29" y="418.865" width="70" height="70"/>
   <object id="53" name="red" type="spawn" x="200.182" y="403.397">
    <point/>
   </object>
@@ -85,27 +84,13 @@
   <object id="55" name="blue" type="spawn" x="236.656" y="1413.42">
    <point/>
   </object>
-  <object id="56" type="coin" gid="19" x="1261" y="421" width="70" height="70"/>
-  <object id="58" type="coin" gid="19" x="1330.48" y="421.266" width="70" height="70"/>
-  <object id="59" type="coin" gid="19" x="1400.86" y="420.734" width="70" height="70"/>
-  <object id="60" type="coin" gid="19" x="1470.33" y="419.667" width="70" height="70"/>
-  <object id="61" type="coin" gid="17" x="1191.15" y="735.799" width="70" height="70"/>
-  <object id="62" type="coin" gid="17" x="1262.86" y="737.934" width="70" height="70"/>
-  <object id="63" type="coin" gid="17" x="1332.34" y="738.2" width="70" height="70"/>
-  <object id="64" type="coin" gid="17" x="1402.72" y="737.668" width="70" height="70"/>
-  <object id="65" type="coin" gid="17" x="1472.19" y="736.601" width="70" height="70"/>
-  <object id="70" type="coin" gid="18" x="945.813" y="1259.8" width="70" height="70"/>
-  <object id="71" type="coin" gid="18" x="1017.52" y="1261.93" width="70" height="70"/>
-  <object id="72" type="coin" gid="18" x="1087" y="1262.2" width="70" height="70"/>
-  <object id="73" type="coin" gid="18" x="1157.38" y="1261.67" width="70" height="70"/>
-  <object id="74" type="coin" gid="18" x="1226.85" y="1260.6" width="70" height="70"/>
-  <object id="75" type="button" gid="27" x="377.121" y="483.485" width="70" height="70"/>
-  <object id="76" type="button" gid="25" x="377.121" y="974.394" width="70" height="70"/>
-  <object id="77" type="button" gid="26" x="377.121" y="1468.33" width="70" height="70"/>
-  <object id="78" type="crate" gid="5" x="280.152" y="486.515" width="70" height="70"/>
-  <object id="79" type="exit" gid="31" x="1955.91" y="489.545" width="70" height="70"/>
-  <object id="80" type="exit" gid="31" x="1955.91" y="980.455" width="70" height="70"/>
-  <object id="81" type="exit" gid="31" x="1955.91" y="1474.39" width="70" height="70"/>
+  <object id="82" type="button" gid="25" x="448.553" y="975.074" width="70" height="70"/>
+  <object id="83" type="button" gid="26" x="433.535" y="1455.62" width="70" height="70"/>
+  <object id="84" type="button" gid="27" x="436.539" y="485.515" width="70" height="70"/>
+  <object id="85" gid="31" x="1959.28" y="488.518" width="70" height="70"/>
+  <object id="86" gid="31" x="1959.28" y="981.081" width="70" height="70"/>
+  <object id="87" gid="31" x="1956.28" y="1470.64" width="70" height="70"/>
+  <object id="88" type="crate" gid="23" x="289.371" y="461.487" width="70" height="70"/>
  </objectgroup>
  <layer id="1" name="World" width="30" height="30">
   <data encoding="base64">

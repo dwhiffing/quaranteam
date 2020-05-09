@@ -57,9 +57,9 @@ export default class extends Phaser.Scene {
   }
 
   overlap(player, object) {
-    object.overlap(player, (obj) => {
-      if (obj.type === 'button' && obj.name === player.name) {
-        this.level.toggleWalls(obj)
+    object.overlap(player, () => {
+      if (object.type === 'button' && object.name === player.name) {
+        this.level.toggleWalls(object)
       }
     })
   }
