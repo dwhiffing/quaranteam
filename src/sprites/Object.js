@@ -41,10 +41,12 @@ export class ObjectSprite extends Phaser.Physics.Arcade.Sprite {
         return
       }
       this.isPressed = true
+      this.setFrame(this.frame.name + 3)
       this.scene.time.addEvent({
         delay: 200,
         callback: () => {
           this.isPressed = false
+          this.setFrame(this.frame.name - 3)
         },
       })
       callback(this)

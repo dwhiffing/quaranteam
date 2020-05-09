@@ -4,7 +4,7 @@ const SPEEDS = {
   blue: 500,
 }
 const JUMPS = {
-  red: 500,
+  red: 600,
   green: 600,
   blue: 900,
 }
