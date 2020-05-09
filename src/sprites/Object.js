@@ -31,6 +31,10 @@ export class ObjectSprite extends Phaser.Physics.Arcade.Sprite {
       player.setVisible(false)
     }
 
+    if (this.type === 'ladder') {
+      player.canClimb = true
+    }
+
     if (this.type === 'button') {
       if (this.isPressed) {
         return
@@ -60,6 +64,9 @@ export const FRAMES = {
   exit: {
     [-1]: 14,
   },
+  ladder: {
+    [-1]: 7,
+  },
 }
 const NAMES = {
   coin: {
@@ -79,5 +86,8 @@ const NAMES = {
   },
   exit: {
     [-1]: 'exit',
+  },
+  ladder: {
+    [-1]: 'ladder',
   },
 }

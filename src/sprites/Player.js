@@ -13,6 +13,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     super(scene, object.x, object.y, 'player')
     this.scene = scene
     this.walk = this.walk.bind(this)
+    this.climb = this.climb.bind(this)
     this.stop = this.stop.bind(this)
     this.action = this.action.bind(this)
     this.activate = this.activate.bind(this)
@@ -22,7 +23,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.setAlpha(0.5)
     this.setCollideWorldBounds(true)
     this.body.useDamping = true
-    this.setDrag(0.86, 1)
+    this.setDrag(0.86, 0.9)
     this.body.setSize(this.width, this.height - 8)
     this.scene.anims.create({
       key: 'walk',
@@ -71,12 +72,22 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
   activate() {
     this.alpha = 1
+    this.setDepth(2)
     this.scene.cameras.main.startFollow(this)
   }
   update() {
-    if (this.body.onFloor()) {
-      this.body.useDamping = true
+    this.body.useDamping = this.body.onFloor() || this.canClimb
+    if (!this.body.onFloor()) {
+      this.body.setAllowGravity(!this.canClimb)
     }
+    this.canClimb = false
+  }
+  climb(direction) {
+    if (!this.canClimb) {
+      return
+    }
+    this.body.setAllowGravity(false)
+    this.body.setVelocityY(direction === 2 ? -250 : 250)
   }
   action() {
     if (this.body.onFloor()) {

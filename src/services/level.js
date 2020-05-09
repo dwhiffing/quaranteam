@@ -13,6 +13,7 @@ export default class LevelService {
     this.groundLayer.setCollisionByExclusion([-1])
 
     this.players = scene.add.group()
+    this.ladders = scene.physics.add.group({ allowGravity: false })
     this.buttons = scene.physics.add.group({ allowGravity: false })
     this.coins = scene.physics.add.group({ allowGravity: false })
     this.exits = scene.physics.add.group({ allowGravity: false })
@@ -40,7 +41,7 @@ export default class LevelService {
     this.players.add(this.bluePlayer)
 
     this.pushers = [this.players, this.crates]
-    this.pickups = [this.buttons, this.coins, this.exits]
+    this.pickups = [this.buttons, this.coins, this.exits, this.ladders]
   }
 
   toggleWalls(button) {

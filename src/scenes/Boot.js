@@ -21,6 +21,8 @@ export default class extends Phaser.Scene {
       this.load.tilemapTiledJSON(`map${i}`, `assets/maps/map${i}.json`)
     }
     this.load.image('left', 'assets/images/left.png')
+    this.load.image('up', 'assets/images/up.png')
+    this.load.image('down', 'assets/images/down.png')
     this.load.image('right', 'assets/images/right.png')
     this.load.image('jump', 'assets/images/jump.png')
     this.load.image('swap', 'assets/images/swap.png')
