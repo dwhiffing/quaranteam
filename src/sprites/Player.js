@@ -1,7 +1,12 @@
 const SPEEDS = {
   red: 300,
-  green: 800,
+  green: 600,
   blue: 500,
+}
+const JUMPS = {
+  red: 500,
+  green: 600,
+  blue: 900,
 }
 export class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y, type) {
@@ -45,12 +50,13 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     const baseSpeed = SPEEDS[this.type]
     const speed = this.body.onFloor() ? baseSpeed : baseSpeed * 0.3
 
-    if (this.type !== 'green' || this.body.onFloor()) {
+    if (
+      this.body.onFloor() ||
+      (this.body.velocity.x < speed && this.body.velocity.x > -speed)
+    ) {
       this.body.setVelocityX(x * speed)
     }
-    if (this.body.onFloor()) {
-      this.anims.play('walk', true)
-    }
+    this.anims.play('walk', true)
     this.flipX = x < 0
   }
   stop() {
@@ -62,18 +68,20 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   activate() {
     this.alpha = 1
   }
-  action() {
-    if (this.type === 'red') {
-    }
+  update() {
     if (this.body.onFloor()) {
+      this.body.useDamping = true
+    }
+  }
+  action() {
+    if (this.body.onFloor()) {
+      this.anims.play('idle', true)
+      this.body.setVelocityY(-JUMPS[this.type])
       if (this.type === 'blue') {
-        this.body.setVelocityY(-900)
-        this.anims.play('idle', true)
         this.body.setVelocityX(0)
       } else if (this.type === 'green') {
-        this.body.setVelocityY(-500)
-        this.anims.play('idle', true)
-        this.body.setVelocityX(this.flipX ? -1200 : 1200)
+        this.body.setVelocityX(this.flipX ? -700 : 700)
+        this.body.useDamping = false
       }
     }
   }

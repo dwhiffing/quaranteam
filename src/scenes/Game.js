@@ -6,6 +6,7 @@ export default class extends Phaser.Scene {
     this.collectCoin = this.collectCoin.bind(this)
     this.touchButton = this.touchButton.bind(this)
     this.toggleTile = this.toggleTile.bind(this)
+    this.touchExit = this.touchExit.bind(this)
   }
 
   init() {}
@@ -17,11 +18,11 @@ export default class extends Phaser.Scene {
     this.groundLayer = this.map.createDynamicLayer('World', groundTiles, 0, 0)
     this.groundLayer.setCollisionByExclusion([-1])
 
-    const exitTiles = this.map.addTilesetImage('objects')
-    this.exitLayer = this.map.createDynamicLayer('Exit', exitTiles, 0, 0)
-
     this.players = this.add.group()
     this.buttons = this.physics.add.group()
+    this.coins = this.physics.add.group()
+    this.exits = this.physics.add.group()
+    this.crates = this.physics.add.group()
 
     this.toggleWalls = this.groundLayer
       .getTilesWithinWorldXY(0, 0, 999999, 999999)
@@ -36,8 +37,10 @@ export default class extends Phaser.Scene {
       }
       if (object.type === 'coin') {
         const coin = this.add
-          .image(object.x, object.y, 'objects')
+          .sprite(object.x, object.y, 'objects')
           .setOrigin(0, 1)
+        this.coins.add(coin)
+        coin.body.setAllowGravity(false)
         if (object.gid === 17) {
           coin.setFrame(0)
         }
@@ -48,6 +51,7 @@ export default class extends Phaser.Scene {
           coin.setFrame(2)
         }
       }
+
       if (object.type === 'switch') {
         const button = this.add
           .sprite(object.x, object.y, 'objects')
@@ -66,9 +70,27 @@ export default class extends Phaser.Scene {
           button.setFrame(10)
           button.type = 'red'
         }
-        // button.on('co', () => {
-        //   console.log('tstart')
-        // })
+      }
+
+      if (object.type === 'crate') {
+        const crate = this.add
+          .sprite(object.x, object.y, 'objects')
+          .setOrigin(0, 1)
+          .setFrame(3)
+        this.crates.add(crate)
+        crate.body.setCollideWorldBounds(true)
+
+        crate.body.useDamping = true
+        crate.body.setDrag(0.8, 0.8)
+      }
+
+      if (object.type === 'exit') {
+        const exit = this.add
+          .sprite(object.x, object.y, 'objects')
+          .setOrigin(0, 1)
+          .setFrame(14)
+        this.exits.add(exit)
+        exit.body.setAllowGravity(false)
       }
     })
 
@@ -81,14 +103,37 @@ export default class extends Phaser.Scene {
     this.players.add(this.greenPlayer)
     this.players.add(this.bluePlayer)
 
-    this.physics.add.collider(this.groundLayer, this.redPlayer)
-    this.physics.add.collider(this.groundLayer, this.greenPlayer)
-    this.physics.add.collider(this.groundLayer, this.bluePlayer)
+    this.physics.add.collider(this.groundLayer, this.players)
+    this.physics.add.collider(this.crates, this.players)
+    this.physics.add.collider(this.groundLayer, this.crates)
+    this.physics.add.overlap(
+      this.crates,
+      this.buttons,
+      this.touchButton,
+      null,
+      this,
+    )
+
+    this.physics.add.overlap(
+      this.players,
+      this.coins,
+      this.collectCoin,
+      null,
+      this,
+    )
 
     this.physics.add.overlap(
       this.players,
       this.buttons,
       this.touchButton,
+      null,
+      this,
+    )
+
+    this.physics.add.overlap(
+      this.players,
+      this.exits,
+      this.touchExit,
       null,
       this,
     )
@@ -99,9 +144,11 @@ export default class extends Phaser.Scene {
     this.spaceKey = this.input.keyboard.addKey('SPACE')
     this.zKey = this.input.keyboard.addKey('Z')
     this.xKey = this.input.keyboard.addKey('X')
+    this.rKey = this.input.keyboard.addKey('R')
     this.zKey.addListener('down', () => this.activePlayer.action())
     this.spaceKey.addListener('down', () => this.activePlayer.action())
     this.xKey.addListener('down', () => this.swap())
+    this.rKey.addListener('down', () => this.scene.restart('Game'))
 
     this.cameras.main.zoom = 0.5
     this.cameras.main.setBounds(
@@ -115,21 +162,19 @@ export default class extends Phaser.Scene {
   }
 
   swap() {
+    const players = this.players.getChildren().filter((p) => p.visible)
+    const activeIndex = players.findIndex((p) => p.alpha === 1)
     this.activePlayer.stop()
     this.activePlayer.deactivate()
+    const nextIndex = activeIndex + 1 > players.length - 1 ? 0 : activeIndex + 1
+    this.activePlayer = players[nextIndex]
 
-    if (this.activePlayer === this.redPlayer) {
-      this.activePlayer = this.greenPlayer
-    } else if (this.activePlayer === this.greenPlayer) {
-      this.activePlayer = this.bluePlayer
-    } else if (this.activePlayer === this.bluePlayer) {
-      this.activePlayer = this.redPlayer
-    }
     this.activePlayer.activate()
     this.cameras.main.startFollow(this.activePlayer)
   }
 
   update(time, delta) {
+    this.activePlayer.update()
     if (this.cursors.left.isDown) {
       this.activePlayer.walk(-1)
     } else if (this.cursors.right.isDown) {
@@ -139,9 +184,8 @@ export default class extends Phaser.Scene {
     }
   }
 
-  collectCoin(sprite, tile) {
-    this.exitLayer.removeTileAt(tile.x, tile.y)
-    this.score++
+  collectCoin(player, coin) {
+    coin.destroy()
   }
 
   touchButton(player, button) {
@@ -166,12 +210,16 @@ export default class extends Phaser.Scene {
     tile.setCollision(false, false, false, false)
     tile.alpha = 0.2
     this.time.addEvent({
-      delay: 100,
+      delay: 200,
       callback: () => {
         tile.setCollision(true, true, true, true)
         tile.alpha = 1
         button.isPressed = false
       },
     })
+  }
+
+  touchExit(player, exit) {
+    player.setVisible(false)
   }
 }
