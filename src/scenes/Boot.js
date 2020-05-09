@@ -20,6 +20,11 @@ export default class extends Phaser.Scene {
     for (let i = 1; i <= NUM_LEVELS; i++) {
       this.load.tilemapTiledJSON(`map${i}`, `assets/maps/map${i}.json`)
     }
+    this.load.image('left', 'assets/images/left.png')
+    this.load.image('right', 'assets/images/right.png')
+    this.load.image('jump', 'assets/images/jump.png')
+    this.load.image('swap', 'assets/images/swap.png')
+    this.load.image('restart', 'assets/images/restart.png')
     this.load.spritesheet('tiles', 'assets/images/tiles.png', {
       frameWidth: 70,
       frameHeight: 70,

@@ -6,6 +6,9 @@ export default class extends Phaser.Scene {
   constructor() {
     super({ key: 'Game' })
     this.overlap = this.overlap.bind(this)
+    this.swap = this.swap.bind(this)
+    this.nextLevel = this.nextLevel.bind(this)
+    this.prevLevel = this.prevLevel.bind(this)
   }
 
   init(opts) {
@@ -18,6 +21,8 @@ export default class extends Phaser.Scene {
     this.width = level.map.widthInPixels
     this.height = level.map.heightInPixels
 
+    this.inputService = new InputService(this)
+
     this.physics.world.bounds.width = this.width
     this.physics.world.bounds.height = this.height
     this.physics.add.collider(level.pushers, level.groundLayer)
@@ -25,13 +30,10 @@ export default class extends Phaser.Scene {
     this.physics.add.overlap(level.pushers, level.buttons, this.overlap)
     this.physics.add.overlap(level.players, level.pickups, this.overlap)
 
-    this.cameras.main.zoom = 0.5
     this.cameras.main.setBounds(0, 0, this.width, this.height)
     this.cameras.main.setBackgroundColor('#ccccff')
     this.activePlayer = level.redPlayer
     this.activePlayer.activate()
-
-    this.inputService = new InputService(this)
   }
 
   swap() {
