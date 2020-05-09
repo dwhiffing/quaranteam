@@ -16,13 +16,24 @@ export default class extends Phaser.Scene {
       )
     })
 
-    this.load.tilemapTiledJSON('map', 'assets/map.json')
-    this.load.spritesheet('tiles', 'assets/tiles.png', {
+    this.load.tilemapTiledJSON('map', 'assets/maps/map.json')
+    this.load.spritesheet('tiles', 'assets/images/tiles.png', {
       frameWidth: 70,
       frameHeight: 70,
     })
-    this.load.image('coin', 'assets/coinGold.png')
-    this.load.atlas('player', 'assets/player.png', 'assets/player.json')
+    this.load.spritesheet('coin', 'assets/images/coin.png', {
+      frameWidth: 70,
+      frameHeight: 70,
+    })
+    this.load.spritesheet('door', 'assets/images/door.png', {
+      frameWidth: 70,
+      frameHeight: 70,
+    })
+    this.load.atlas(
+      'player',
+      'assets/images/player.png',
+      'assets/images/player.json',
+    )
 
     this.load.on('complete', () => {
       progress.destroy()

@@ -18,22 +18,31 @@ export default class extends Phaser.Scene {
     const coinTiles = this.map.addTilesetImage('coin')
     this.coinLayer = this.map.createDynamicLayer('Coins', coinTiles, 0, 0)
 
+    const doorTiles = this.map.addTilesetImage('door')
+    this.doorLayer = this.map.createDynamicLayer('Doors', doorTiles, 0, 0)
+
     this.physics.world.bounds.width = this.groundLayer.width
     this.physics.world.bounds.height = this.groundLayer.height
 
     const c1 = this.map.findObject('Player', (obj) => obj.name === '1')
     const c2 = this.map.findObject('Player', (obj) => obj.name === '2')
     const c3 = this.map.findObject('Player', (obj) => obj.name === '3')
+
     this.player = this.add.existing(new Player(this, c1.x, c1.y))
+    this.player.setTint(0x0000ff)
     this.activePlayer = this.player
     this.player2 = this.add.existing(new Player(this, c2.x, c2.y))
+    this.player2.setTint(0xff0000)
     this.player3 = this.add.existing(new Player(this, c3.x, c3.y))
+    this.player3.setTint(0x00ff00)
 
     this.physics.add.collider(this.groundLayer, this.player)
     this.physics.add.collider(this.groundLayer, this.player2)
     this.physics.add.collider(this.groundLayer, this.player3)
 
     this.coinLayer.setTileIndexCallback(17, this.collectCoin, this)
+    this.coinLayer.setTileIndexCallback(19, this.collectCoin, this)
+    this.coinLayer.setTileIndexCallback(18, this.collectCoin, this)
     this.physics.add.overlap(this.player, this.coinLayer)
     this.physics.add.overlap(this.player2, this.coinLayer)
     this.physics.add.overlap(this.player3, this.coinLayer)
@@ -50,12 +59,6 @@ export default class extends Phaser.Scene {
     )
     this.cameras.main.startFollow(this.activePlayer)
     this.cameras.main.setBackgroundColor('#ccccff')
-
-    this.text = this.add.text(20, 570, '0', {
-      fontSize: '20px',
-      fill: '#ffffff',
-    })
-    this.text.setScrollFactor(0)
   }
 
   swap() {
@@ -87,7 +90,6 @@ export default class extends Phaser.Scene {
   collectCoin(sprite, tile) {
     this.coinLayer.removeTileAt(tile.x, tile.y)
     this.score++
-    this.text.setText(this.score)
     return false
   }
 }
