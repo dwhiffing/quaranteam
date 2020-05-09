@@ -45,6 +45,12 @@ export default class extends Phaser.Scene {
   update(time, delta) {
     this.inputService.update(time, delta)
     this.activePlayer.update()
+    if (
+      this.level &&
+      this.level.players.getChildren().every((p) => !p.visible)
+    ) {
+      this.scene.start('Game', { levelNumber: this.levelNumber + 1 })
+    }
   }
 
   overlap(player, object) {
