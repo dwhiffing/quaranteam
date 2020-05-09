@@ -60,6 +60,9 @@ export const FRAMES = {
   },
   crate: {
     [-1]: 3,
+    5: 6,
+    6: 4,
+    7: 5,
   },
   exit: {
     [-1]: 14,
@@ -83,6 +86,9 @@ const NAMES = {
   },
   crate: {
     [-1]: 'crate',
+    5: 'red',
+    6: 'green',
+    7: 'blue',
   },
   exit: {
     [-1]: 'exit',

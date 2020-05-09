@@ -42,6 +42,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       frameRate: 10,
     })
     this.type = object.name
+    this.name = object.name
     if (this.type === 'red') {
       this.setTint(0xff0000)
     } else if (this.type === 'green') {

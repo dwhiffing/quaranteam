@@ -72,7 +72,7 @@
   </tile>
  </tileset>
  <tileset firstgid="17" name="objects" tilewidth="70" tileheight="70" tilecount="16" columns="4">
-  <image source="../images/objects.png" width="280" height="280"/>
+  <image source="../images/tiles.png" width="280" height="280"/>
  </tileset>
  <objectgroup id="7" name="Objects">
   <object id="53" name="red" type="spawn" x="200.182" y="403.397">

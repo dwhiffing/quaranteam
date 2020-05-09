@@ -26,7 +26,7 @@ export default class extends Phaser.Scene {
     this.physics.world.bounds.width = this.width
     this.physics.world.bounds.height = this.height
     this.physics.add.collider(level.pushers, level.groundLayer)
-    this.physics.add.collider(level.crates, level.players)
+    this.physics.add.collider(level.pushers, level.pushers)
     this.physics.add.overlap(level.pushers, level.buttons, this.overlap)
     this.physics.add.overlap(level.players, level.pickups, this.overlap)
 
@@ -58,7 +58,7 @@ export default class extends Phaser.Scene {
 
   overlap(player, object) {
     object.overlap(player, (obj) => {
-      if (obj.type === 'button') {
+      if (obj.type === 'button' && obj.name === player.name) {
         this.level.toggleWalls(obj)
       }
     })
