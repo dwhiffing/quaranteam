@@ -49,7 +49,12 @@ export default class extends Phaser.Scene {
 
     this.cursors = this.input.keyboard.createCursorKeys()
     this.spaceKey = this.input.keyboard.addKey('SPACE')
-    this.spaceKey.addListener('down', () => this.swap())
+    this.zKey = this.input.keyboard.addKey('Z')
+    this.xKey = this.input.keyboard.addKey('X')
+    this.zKey.addListener('down', () => this.activePlayer.jump())
+    this.spaceKey.addListener('down', () => this.activePlayer.jump())
+    this.xKey.addListener('down', () => this.swap())
+
     this.cameras.main.zoom = 0.5
     this.cameras.main.setBounds(
       0,
@@ -81,9 +86,6 @@ export default class extends Phaser.Scene {
       this.activePlayer.walk(300)
     } else {
       this.activePlayer.stop()
-    }
-    if (this.cursors.up.isDown) {
-      this.activePlayer.jump()
     }
   }
 
