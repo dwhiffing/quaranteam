@@ -7,10 +7,12 @@ export default class extends Phaser.Scene {
     this.overlap = this.overlap.bind(this)
   }
 
-  init() {}
+  init(opts) {
+    this.levelNumber = opts.levelNumber || 1
+  }
 
   create() {
-    const level = new LevelService(this)
+    const level = new LevelService(this, `map${this.levelNumber}`)
     this.level = level
     this.width = level.map.widthInPixels
     this.height = level.map.heightInPixels

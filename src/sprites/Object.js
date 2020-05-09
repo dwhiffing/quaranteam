@@ -14,7 +14,7 @@ export class ObjectSprite extends Phaser.Physics.Arcade.Sprite {
     this.setFrame(frame)
 
     setTimeout(() => {
-      if (this.type === 'crate') {
+      if (this.body && this.type === 'crate') {
         this.body.useDamping = true
         this.body.setDrag(0.8, 0.8)
       }

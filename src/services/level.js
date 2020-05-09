@@ -2,11 +2,11 @@ import { Player } from '../sprites/Player'
 import { ObjectSprite, FRAMES } from '../sprites/Object'
 
 export default class LevelService {
-  constructor(scene) {
+  constructor(scene, key) {
     this.scene = scene
     this.toggleWalls = this.toggleWalls.bind(this)
     this.toggleTile = this.toggleTile.bind(this)
-    this.map = scene.make.tilemap({ key: 'map' })
+    this.map = scene.make.tilemap({ key })
 
     const groundTiles = this.map.addTilesetImage('tiles')
     this.groundLayer = this.map.createDynamicLayer('World', groundTiles, 0, 0)

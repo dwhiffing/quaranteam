@@ -16,7 +16,8 @@ export default class extends Phaser.Scene {
       )
     })
 
-    this.load.tilemapTiledJSON('map', 'assets/maps/map.json')
+    this.load.tilemapTiledJSON('map1', 'assets/maps/map1.json')
+    this.load.tilemapTiledJSON('map2', 'assets/maps/map2.json')
     this.load.spritesheet('tiles', 'assets/images/tiles.png', {
       frameWidth: 70,
       frameHeight: 70,
