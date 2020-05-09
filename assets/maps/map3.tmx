@@ -72,7 +72,7 @@
   </tile>
  </tileset>
  <tileset firstgid="17" name="objects" tilewidth="70" tileheight="70" tilecount="16" columns="4">
-  <image source="../images/objects.png" width="280" height="280"/>
+  <image source="../images/tiles.png" width="280" height="280"/>
  </tileset>
  <objectgroup id="7" name="Objects">
   <object id="53" name="red" type="spawn" x="200.182" y="403.397">
@@ -84,12 +84,11 @@
   <object id="55" name="blue" type="spawn" x="236.656" y="1413.42">
    <point/>
   </object>
-  <object id="82" gid="24" x="350.443" y="489.518" width="70" height="70"/>
-  <object id="83" gid="24" x="350" y="420" width="70" height="70"/>
-  <object id="84" gid="24" x="350" y="350" width="70" height="70"/>
-  <object id="91" gid="24" x="350.555" y="280.092" width="70" height="70"/>
-  <object id="92" gid="24" x="350.112" y="210.574" width="70" height="70"/>
-  <object id="93" gid="24" x="350.112" y="140.574" width="70" height="70"/>
+  <object id="82" type="ladder" gid="24" x="350.443" y="489.518" width="70" height="70"/>
+  <object id="83" type="ladder" gid="24" x="350" y="420" width="70" height="70"/>
+  <object id="84" type="ladder" gid="24" x="350" y="350" width="70" height="70"/>
+  <object id="91" type="ladder" gid="24" x="350.555" y="280.092" width="70" height="70"/>
+  <object id="92" type="ladder" gid="24" x="350.112" y="210.574" width="70" height="70"/>
  </objectgroup>
  <layer id="1" name="World" width="30" height="30">
   <data encoding="base64">
