@@ -1,12 +1,20 @@
+const SPEEDS = {
+  red: 300,
+  green: 800,
+  blue: 500,
+}
 export class Player extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y) {
+  constructor(scene, x, y, type) {
     super(scene, x, y, 'player')
     this.scene = scene
     this.walk = this.walk.bind(this)
     this.stop = this.stop.bind(this)
-    this.jump = this.jump.bind(this)
+    this.action = this.action.bind(this)
     this.scene.physics.world.enable(this)
+    this.setAlpha(0.5)
     this.setCollideWorldBounds(true)
+    this.body.useDamping = true
+    this.setDrag(0.86, 1)
     this.body.setSize(this.width, this.height - 8)
     this.scene.anims.create({
       key: 'walk',
@@ -24,19 +32,49 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       frames: [{ key: 'player', frame: 'p1_stand' }],
       frameRate: 10,
     })
+    this.type = type
+    if (type === 'red') {
+      this.setTint(0xff0000)
+    } else if (type === 'green') {
+      this.setTint(0x00ff00)
+    } else if (type === 'blue') {
+      this.setTint(0x0000ff)
+    }
   }
   walk(x) {
-    this.body.setVelocityX(x)
-    this.anims.play('walk', true)
+    const baseSpeed = SPEEDS[this.type]
+    const speed = this.body.onFloor() ? baseSpeed : baseSpeed * 0.3
+
+    if (this.type !== 'green' || this.body.onFloor()) {
+      this.body.setVelocityX(x * speed)
+    }
+    if (this.body.onFloor()) {
+      this.anims.play('walk', true)
+    }
     this.flipX = x < 0
   }
   stop() {
-    this.body.setVelocityX(0)
     this.anims.play('idle', true)
   }
-  jump() {
+  deactivate() {
+    this.alpha = 0.5
+  }
+  activate() {
+    this.alpha = 1
+  }
+  action() {
+    if (this.type === 'red') {
+    }
     if (this.body.onFloor()) {
-      this.body.setVelocityY(-700)
+      if (this.type === 'blue') {
+        this.body.setVelocityY(-900)
+        this.anims.play('idle', true)
+        this.body.setVelocityX(0)
+      } else if (this.type === 'green') {
+        this.body.setVelocityY(-500)
+        this.anims.play('idle', true)
+        this.body.setVelocityX(this.flipX ? -1200 : 1200)
+      }
     }
   }
 }
