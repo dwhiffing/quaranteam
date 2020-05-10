@@ -14,7 +14,7 @@ export default class extends Phaser.Scene {
       .tileSprite(0, 0, 1920, 1080, 'background')
       .setScrollFactor(0)
       .setTint(0x73cd4b, 0x1ea7e1, 0x73cd4b, 0x1ea7e1)
-    this.add.image(this.width / 2, this.height / 2 - 70, 'about')
+    this.add.image(this.width / 2, this.height / 2 - 120, 'about')
     this.add
       .image(20, 20, 'exit')
       .setScale(0.5)
@@ -23,15 +23,29 @@ export default class extends Phaser.Scene {
         this.scene.start('Menu')
       })
 
+    this.add
+      .text(
+        this.width / 2,
+        this.height / 2,
+        'Use each of the characters to escape together. \nUse the onscreen controls or Arrows + Z and X to move around.',
+        {
+          fontSize: 20,
+          fontFamily: 'Sailec',
+          fontWeight: '500',
+          color: '#fff',
+          align: 'center',
+        },
+      )
+      .setOrigin(0.5)
+
     const names = [
-      'Dan Whiffing',
-      'Ash Dadoun',
-      'Steph Braithwaite',
-      'Sam Braithwaite',
+      'Code & Levels:  Dan Whiffing',
+      'Art:  Ash Dadoun, Steph & Sam Braithwaite',
+      'Music:  Purple Planet',
     ]
     names.forEach((name, index) => {
       this.add
-        .text(this.width / 2, this.height / 2 + index * 25, name, {
+        .text(this.width / 2, this.height / 2 + index * 25 + 90, name, {
           fontSize: 20,
           fontFamily: 'Sailec',
           fontWeight: '500',
