@@ -8,6 +8,12 @@ const JUMPS = {
   green: 300,
   blue: 495,
 }
+
+const TINTS = {
+  red: 0xe86a17,
+  blue: 0x1ea7e1,
+  green: 0x73cd4b,
+}
 export class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, object) {
     super(scene, object.x, object.y, 'tilemap')
@@ -111,6 +117,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   activate() {
     this.alpha = 1
     this.setDepth(2)
+    this.scene.background.setTint(TINTS[this.type])
     const lastX = this.scene.cameras.main.scrollX
     const lastY = this.scene.cameras.main.scrollY
     this.scene.cameras.main.startFollow(this, true, 0.2, 0.2)

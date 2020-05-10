@@ -20,7 +20,13 @@ export default class extends Phaser.Scene {
     MAPS.forEach((map) =>
       this.load.tilemapTiledJSON(`map${map}`, `assets/maps/map${map}.json`),
     )
+    this.load.audio('menuMusic', 'assets/audio/menu.mp3')
+    this.load.audio('gameMusic', 'assets/audio/game.mp3')
     this.load.image('left', 'assets/images/left.png')
+    this.load.image('background', 'assets/images/background.jpg')
+    this.load.image('title', 'assets/images/title.png')
+    this.load.image('about', 'assets/images/about.png')
+    this.load.image('levels', 'assets/images/levels.png')
     this.load.image('up', 'assets/images/up.png')
     this.load.image('down', 'assets/images/down.png')
     this.load.image('right', 'assets/images/right.png')
@@ -30,6 +36,10 @@ export default class extends Phaser.Scene {
     this.load.image('helpButton', 'assets/images/help.png')
     this.load.image('restart', 'assets/images/restart.png')
     this.load.image('exit', 'assets/images/exit.png')
+    this.load.spritesheet('mute', 'assets/images/mute.png', {
+      frameWidth: 100,
+      frameHeight: 100,
+    })
     this.load.spritesheet('tilemap', 'assets/images/tilemap.png', {
       frameWidth: 63,
       frameHeight: 63,

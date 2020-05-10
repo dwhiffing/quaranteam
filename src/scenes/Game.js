@@ -16,6 +16,10 @@ export default class extends Phaser.Scene {
   }
 
   create() {
+    this.background = this.add
+      .tileSprite(0, 0, 1920, 1080, 'background')
+      .setScrollFactor(0)
+
     const level = new LevelService(this, `map${MAPS[this.levelNumber - 1]}`)
     this.level = level
     this.width = level.map.widthInPixels
@@ -35,6 +39,20 @@ export default class extends Phaser.Scene {
     this.activePlayer.activate()
 
     this.inputService = new InputService(this)
+
+    this.muteButton = this.add
+      .image(80, 35, 'mute')
+      .setScale(0.5)
+      .setScrollFactor(0)
+      .setFrame(window.muted ? 1 : 0)
+      .setInteractive()
+      .on('pointerdown', () => {
+        window.muted = !window.muted
+        localStorage.setItem('muted', !!window.muted ? 1 : 0)
+        this.sound.mute = !!window.muted
+        this.muteButton.setFrame(window.muted ? 1 : 0)
+      })
+    this.iter = 0
   }
 
   swap() {
@@ -49,6 +67,9 @@ export default class extends Phaser.Scene {
   }
 
   update(time, delta) {
+    this.iter += 0.001
+    this.background.tilePositionX = Math.cos(-this.iter) * 400
+    this.background.tilePositionY = Math.sin(-this.iter) * 400
     this.inputService.update(time, delta)
     this.activePlayer.update()
     if (

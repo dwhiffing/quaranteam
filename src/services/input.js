@@ -16,7 +16,6 @@ export default class InputService {
     this.direction = 0
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     const makeButton = (x, y, key, callback, scale = 0.7) => {
-      if (!isMobile) return
       const image = this.scene.add.image(x, y, key)
       image
         .setScale(scale)
@@ -26,33 +25,35 @@ export default class InputService {
         .on('pointerdown', callback)
       return image
     }
-    this.leftTouch = makeButton(DISTX, height - DISTY, 'left', this.leftDown)
-    this.upTouch = makeButton(
-      DISTX * 1.75,
-      height - DISTY * 1.6,
-      'up',
-      this.upDown,
-    )
-    this.downTouch = makeButton(
-      DISTX * 1.75,
-      height - DISTY + DISTY * 0.6,
-      'down',
-      this.downDown,
-    )
-    this.rightTouch = makeButton(
-      DISTX * 2.5,
-      height - DISTY,
-      'right',
-      this.rightDown,
-    )
-    isMobile && this.leftTouch.on('pointerup', this.keyUp)
-    isMobile && this.downTouch.on('pointerup', this.keyUp)
-    isMobile && this.upTouch.on('pointerup', this.keyUp)
-    isMobile && this.rightTouch.on('pointerup', this.keyUp)
-    makeButton(width - DISTX, height - DISTY, 'jump', this.jump)
-    makeButton(width - DISTX * 2.5, height - DISTY, 'swap', this.scene.swap)
+    if (isMobile) {
+      this.leftTouch = makeButton(DISTX, height - DISTY, 'left', this.leftDown)
+      this.upTouch = makeButton(
+        DISTX * 1.75,
+        height - DISTY * 1.6,
+        'up',
+        this.upDown,
+      )
+      this.downTouch = makeButton(
+        DISTX * 1.75,
+        height - DISTY + DISTY * 0.6,
+        'down',
+        this.downDown,
+      )
+      this.rightTouch = makeButton(
+        DISTX * 2.5,
+        height - DISTY,
+        'right',
+        this.rightDown,
+      )
+      this.leftTouch.on('pointerup', this.keyUp)
+      this.downTouch.on('pointerup', this.keyUp)
+      this.upTouch.on('pointerup', this.keyUp)
+      this.rightTouch.on('pointerup', this.keyUp)
+      makeButton(width - DISTX, height - DISTY, 'jump', this.jump)
+      makeButton(width - DISTX * 2.5, height - DISTY, 'swap', this.scene.swap)
+      makeButton(width - DISTX / 1.5, DISTY / 2, 'restart', this.restart, 0.5)
+    }
     makeButton(DISTX / 1.5, DISTY / 2, 'exit', this.exit)
-    makeButton(width - DISTX / 1.5, DISTY / 2, 'restart', this.restart, 0.5)
     this.cursors = this.scene.input.keyboard.createCursorKeys()
     this.spaceKey = this.scene.input.keyboard.addKey('SPACE')
     this.zKey = this.scene.input.keyboard.addKey('Z')
