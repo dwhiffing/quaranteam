@@ -26,8 +26,9 @@ export class ObjectSprite extends Phaser.Physics.Arcade.Sprite {
       this.destroy()
     }
 
-    if (this.type === 'exit') {
+    if (this.type === 'exit' && player.visible) {
       player.setVisible(false)
+      this.scene.swap()
     }
 
     if (this.type === 'ladder') {

@@ -40,10 +40,12 @@ export default class extends Phaser.Scene {
   swap() {
     const players = this.level.players.getChildren().filter((p) => p.visible)
     const activeIndex = players.findIndex((p) => p.alpha === 1)
-    this.activePlayer.deactivate()
-    const nextIndex = activeIndex + 1 >= players.length ? 0 : activeIndex + 1
-    this.activePlayer = players[nextIndex]
-    this.activePlayer.activate()
+    if (players.length > 0) {
+      this.activePlayer.deactivate()
+      const nextIndex = activeIndex + 1 >= players.length ? 0 : activeIndex + 1
+      this.activePlayer = players[nextIndex]
+      this.activePlayer.activate()
+    }
   }
 
   update(time, delta) {

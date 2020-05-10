@@ -16,14 +16,14 @@
   <object id="55" name="blue" type="spawn" x="185.141" y="1258.87">
    <point/>
   </object>
-  <object id="97" type="exit" gid="169" x="1762.94" y="443.121" width="63" height="63"/>
-  <object id="98" type="exit" gid="169" x="1761.29" y="943.985" width="63" height="63"/>
-  <object id="99" type="exit" gid="169" x="1765.47" y="1386.68" width="63" height="63"/>
-  <object id="100" type="button" gid="105" x="947.788" y="1385.55" width="63" height="63"/>
-  <object id="101" type="button" gid="106" x="1450.82" y="1385.55" width="63" height="63"/>
-  <object id="102" type="button" gid="76" x="1072.03" y="1385.55" width="63" height="63"/>
-  <object id="103" type="crate" gid="283" x="1141.64" y="1385.55" width="63" height="63"/>
-  <object id="104" type="crate" gid="282" x="1378.09" y="1388.58" width="63" height="63"/>
+  <object id="97" type="exit" gid="169" x="1764" y="441" width="63" height="63"/>
+  <object id="98" type="exit" gid="169" x="1764" y="945" width="63" height="63"/>
+  <object id="99" type="exit" gid="169" x="1764" y="1386" width="63" height="63"/>
+  <object id="100" type="button" gid="105" x="945" y="1386" width="63" height="63"/>
+  <object id="101" type="button" gid="106" x="1449" y="1386" width="63" height="63"/>
+  <object id="102" type="button" gid="76" x="1071" y="1386" width="63" height="63"/>
+  <object id="103" type="crate" gid="283" x="1134" y="1386" width="63" height="63"/>
+  <object id="104" type="crate" gid="282" x="1386" y="1386" width="63" height="63"/>
  </objectgroup>
  <layer id="1" name="World" width="30" height="30">
   <data encoding="base64">
