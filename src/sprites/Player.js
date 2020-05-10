@@ -21,7 +21,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.scene.physics.world.enable(this)
     this.body.setMaxVelocity(600, 900)
 
-    this.setAlpha(0.5)
     this.setCollideWorldBounds(true)
     this.body.useDamping = true
     this.setDrag(0.86, 0.9)
@@ -54,15 +53,21 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       }),
       frameRate: 4,
     })
-    // this.setSize(58, 50)
-    // this.setOffset(3, 11)
+    this.setSize(58, 50)
+    this.setOffset(3, 11)
+    this.activate()
+    this.deactivate()
   }
   walk(x) {
     const baseSpeed = SPEEDS[this.type]
-    const speed = this.body.onFloor() ? baseSpeed : baseSpeed * 0.3
+    const speed =
+      this.body.onFloor() || this.body.touching.down
+        ? baseSpeed
+        : baseSpeed * 0.3
 
     if (
       this.body.onFloor() ||
+      this.body.touching.down ||
       (this.body.velocity.x < speed && this.body.velocity.x > -speed)
     ) {
       this.body.setVelocityX(x * speed)
@@ -103,7 +108,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
   action() {
     if (this.body.onFloor() || this.body.touching.down) {
-      this.anims.play('idle', true)
+      this.anims.play(`idle${this.type}`, true)
       this.body.setVelocityY(-JUMPS[this.type])
       if (this.type === 'blue') {
         this.body.setVelocityX(0)

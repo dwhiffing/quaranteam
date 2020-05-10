@@ -29,6 +29,7 @@ export default class extends Phaser.Scene {
     this.physics.add.overlap(level.players, level.pickups, this.overlap)
 
     this.cameras.main.setBounds(0, 0, this.width, this.height)
+    this.cameras.main.setBackgroundColor('#555577')
     this.activePlayer = Phaser.Math.RND.pick(level.players.getChildren())
     this.cameras.main.setLerp(0.2, 0.2)
     this.activePlayer.activate()
@@ -60,8 +61,12 @@ export default class extends Phaser.Scene {
 
   overlap(player, object) {
     object.overlap(player, () => {
-      if (object.type === 'button' && object.name === player.name) {
-        this.level.toggleWalls(object)
+      if (
+        (object.type === 'button' && object.name === player.name) ||
+        object.name === 'any' ||
+        player.name === 'any'
+      ) {
+        this.level.toggleWalls(object.name)
       }
     })
   }

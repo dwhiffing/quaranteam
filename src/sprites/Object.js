@@ -15,7 +15,7 @@ export class ObjectSprite extends Phaser.Physics.Arcade.Sprite {
     setTimeout(() => {
       if (this.body && this.type === 'crate') {
         this.body.useDamping = true
-        this.body.setDrag(0.8, 0.8)
+        this.body.setDrag(0.8, 1)
       }
       if (this.body && this.type === 'button') {
         this.body.useDamping = true
@@ -50,7 +50,11 @@ export class ObjectSprite extends Phaser.Physics.Arcade.Sprite {
       player.canClimb = true
     }
 
-    if (this.type === 'button' && player.name === this.name) {
+    if (
+      (this.type === 'button' && player.name === this.name) ||
+      player.name === 'any' ||
+      this.name === 'any'
+    ) {
       if (this.isPressed) {
         return
       }
@@ -88,7 +92,7 @@ export const NAMES = {
     225: 'red',
   },
   crate: {
-    [-1]: 'crate',
+    192: 'any',
     281: 'red',
     283: 'green',
     282: 'blue',

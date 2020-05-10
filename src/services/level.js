@@ -47,29 +47,27 @@ export default class LevelService {
     this.pickups = [this.buttons, this.coins, this.exits, this.ladders]
   }
 
-  toggleWalls(button) {
+  toggleWalls(name) {
     this.togglableWalls.forEach((t) => {
-      if (t.index === 225 && button.name === 'red') {
-        this.toggleTile(this.groundLayer.getTileAt(t.x, t.y), button)
+      if (t.index === 225 && name === 'red') {
+        this.toggleTile(this.groundLayer.getTileAt(t.x, t.y))
       }
-      if (t.index === 196 && button.name === 'green') {
-        this.toggleTile(this.groundLayer.getTileAt(t.x, t.y), button)
+      if (t.index === 196 && name === 'green') {
+        this.toggleTile(this.groundLayer.getTileAt(t.x, t.y))
       }
-      if (t.index === 226 && button.name === 'blue') {
-        this.toggleTile(this.groundLayer.getTileAt(t.x, t.y), button)
+      if (t.index === 226 && name === 'blue') {
+        this.toggleTile(this.groundLayer.getTileAt(t.x, t.y))
       }
     })
   }
 
-  toggleTile(tile, button) {
-    tile.collideLeft = false
-    tile.collideRight = false
+  toggleTile(tile) {
+    this.groundLayer.setCollision([tile.index], false)
     tile.alpha = 0.2
     this.scene.time.addEvent({
       delay: 200,
       callback: () => {
-        tile.collideLeft = true
-        tile.collideRight = true
+        this.groundLayer.setCollision([tile.index], true)
         tile.alpha = 1
       },
     })
