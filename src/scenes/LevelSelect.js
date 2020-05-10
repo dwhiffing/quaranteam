@@ -21,7 +21,7 @@ export default class extends Phaser.Scene {
     MAPS.forEach((map) =>
       this.add
         .image(
-          this.width / 2 - 150 + 75 * map,
+          this.width / 2 - 330 + 60 * map,
           this.height / 2 + 50,
           'playButton',
         )
