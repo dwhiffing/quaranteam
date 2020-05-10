@@ -109,12 +109,20 @@ export default class InputService {
   }
 
   cleanup() {
-    this.nextKey.removeListener('down')
-    this.lastKey.removeListener('down')
-    this.rKey.removeListener('down')
-    this.xKey.removeListener('down')
-    this.spaceKey.removeListener('down')
+    this.cursors.up.removeListener('down')
+    this.cursors.left.removeListener('down')
+    this.cursors.right.removeListener('down')
+    this.cursors.down.removeListener('down')
+    this.cursors.down.removeListener('up')
+    this.cursors.up.removeListener('up')
+    this.cursors.left.removeListener('up')
+    this.cursors.right.removeListener('up')
     this.zKey.removeListener('down')
+    this.spaceKey.removeListener('down')
+    this.xKey.removeListener('down')
+    this.lastKey.removeListener('down')
+    this.nextKey.removeListener('down')
+    this.rKey.removeListener('down')
   }
 
   update() {
