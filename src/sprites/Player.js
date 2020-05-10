@@ -54,8 +54,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       }),
       frameRate: 4,
     })
-    this.setSize(32, 50)
-    this.setOffset(16, 11)
+    // this.setSize(58, 50)
+    // this.setOffset(3, 11)
   }
   walk(x) {
     const baseSpeed = SPEEDS[this.type]
