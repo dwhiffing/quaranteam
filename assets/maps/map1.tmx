@@ -16,13 +16,13 @@
   <object id="55" name="blue" type="spawn" x="176.587" y="1227.21">
    <point/>
   </object>
-  <object id="89" type="crate" gid="281" x="239.309" y="430.457" width="63" height="63"/>
-  <object id="90" type="button" gid="105" x="380.47" y="439.467" width="63" height="63"/>
-  <object id="91" type="button" gid="76" x="371.46" y="880.971" width="63" height="63"/>
-  <object id="92" type="button" gid="106" x="380.47" y="1322.48" width="63" height="63"/>
-  <object id="93" type="exit" gid="169" x="2059.39" y="1322.47" width="63" height="63"/>
-  <object id="94" type="exit" gid="169" x="2061.89" y="878.54" width="63" height="63"/>
-  <object id="95" type="exit" gid="169" x="2066.91" y="438.039" width="63" height="63"/>
+  <object id="89" type="crate" gid="281" x="252" y="441" width="63" height="63"/>
+  <object id="90" type="button" gid="105" x="378" y="441" width="63" height="63"/>
+  <object id="91" type="button" gid="76" x="378" y="882" width="63" height="63"/>
+  <object id="92" type="button" gid="106" x="378" y="1323" width="63" height="63"/>
+  <object id="93" type="exit" gid="169" x="2079" y="1323" width="63" height="63"/>
+  <object id="94" type="exit" gid="169" x="2079" y="882" width="63" height="63"/>
+  <object id="95" type="exit" gid="169" x="2079" y="441" width="63" height="63"/>
   <object id="96" x="282.323" y="402.46">
    <ellipse/>
   </object>

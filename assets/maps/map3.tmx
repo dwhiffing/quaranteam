@@ -16,23 +16,23 @@
   <object id="55" name="blue" type="spawn" x="170.656" y="1271.42">
    <point/>
   </object>
-  <object id="117" type="exit" gid="169" x="563" y="315" width="63" height="63"/>
-  <object id="118" type="exit" gid="169" x="1827" y="1135" width="63" height="63"/>
-  <object id="119" type="exit" gid="169" x="1767" y="441" width="63" height="63"/>
-  <object id="120" type="ladder" gid="103" x="441" y="379" width="63" height="63"/>
-  <object id="121" type="ladder" gid="103" x="441.5" y="441.5" width="63" height="63"/>
-  <object id="122" type="ladder" gid="103" x="440.917" y="504.25" width="63" height="63"/>
-  <object id="123" type="ladder" gid="103" x="441.417" y="566.75" width="63" height="63"/>
-  <object id="126" type="ladder" gid="103" x="441.583" y="629.583" width="63" height="63"/>
-  <object id="127" type="ladder" gid="103" x="442.083" y="692.083" width="63" height="63"/>
-  <object id="131" type="ladder" gid="103" x="1638.42" y="756.042" width="63" height="63"/>
-  <object id="132" type="ladder" gid="103" x="1638.58" y="818.875" width="63" height="63"/>
-  <object id="133" type="ladder" gid="103" x="1639.08" y="881.375" width="63" height="63"/>
-  <object id="135" type="ladder" gid="103" x="251.318" y="189.61" width="63" height="63"/>
-  <object id="136" type="ladder" gid="103" x="250.735" y="252.36" width="63" height="63"/>
-  <object id="137" type="ladder" gid="103" x="251.235" y="314.86" width="63" height="63"/>
-  <object id="138" type="ladder" gid="103" x="251.401" y="377.693" width="63" height="63"/>
-  <object id="139" type="ladder" gid="103" x="251.901" y="440.193" width="63" height="63"/>
+  <object id="117" type="exit" gid="169" x="567" y="315" width="63" height="63"/>
+  <object id="118" type="exit" gid="169" x="1827" y="1134" width="63" height="63"/>
+  <object id="119" type="exit" gid="169" x="1764" y="441" width="63" height="63"/>
+  <object id="120" type="ladder" gid="103" x="441" y="378" width="63" height="63"/>
+  <object id="121" type="ladder" gid="103" x="441" y="441" width="63" height="63"/>
+  <object id="122" type="ladder" gid="103" x="441" y="504" width="63" height="63"/>
+  <object id="123" type="ladder" gid="103" x="441" y="567" width="63" height="63"/>
+  <object id="126" type="ladder" gid="103" x="441" y="630" width="63" height="63"/>
+  <object id="127" type="ladder" gid="103" x="441" y="693" width="63" height="63"/>
+  <object id="131" type="ladder" gid="103" x="1638" y="756" width="63" height="63"/>
+  <object id="132" type="ladder" gid="103" x="1638" y="819" width="63" height="63"/>
+  <object id="133" type="ladder" gid="103" x="1638" y="882" width="63" height="63"/>
+  <object id="135" type="ladder" gid="103" x="252" y="189" width="63" height="63"/>
+  <object id="136" type="ladder" gid="103" x="252" y="252" width="63" height="63"/>
+  <object id="137" type="ladder" gid="103" x="252" y="315" width="63" height="63"/>
+  <object id="138" type="ladder" gid="103" x="252" y="378" width="63" height="63"/>
+  <object id="139" type="ladder" gid="103" x="252" y="441" width="63" height="63"/>
  </objectgroup>
  <layer id="1" name="World" width="30" height="30">
   <data encoding="base64">
