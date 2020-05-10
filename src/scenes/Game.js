@@ -20,6 +20,8 @@ export default class extends Phaser.Scene {
       .tileSprite(0, 0, 1920, 1080, 'background')
       .setScrollFactor(0)
 
+    this.swapSound = this.sound.add('swap', { volume: 0.5 })
+
     const level = new LevelService(this, `map${MAPS[this.levelNumber - 1]}`)
     this.level = level
     this.width = level.map.widthInPixels
@@ -59,6 +61,7 @@ export default class extends Phaser.Scene {
     const players = this.level.players.getChildren().filter((p) => p.visible)
     const activeIndex = players.findIndex((p) => p.alpha === 1)
     if (players.length > 0) {
+      this.swapSound.play()
       this.activePlayer.deactivate()
       const nextIndex = activeIndex + 1 >= players.length ? 0 : activeIndex + 1
       this.activePlayer = players[nextIndex]
@@ -93,7 +96,10 @@ export default class extends Phaser.Scene {
   }
 
   nextLevel() {
-    if (this.levelNumber >= MAPS.length) return
+    if (this.levelNumber >= MAPS.length) {
+      this.scene.start('Menu')
+      return
+    }
     this.inputService.cleanup()
     this.scene.start('Game', {
       levelNumber: this.levelNumber + 1,

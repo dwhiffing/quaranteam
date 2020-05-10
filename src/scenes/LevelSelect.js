@@ -23,7 +23,7 @@ export default class extends Phaser.Scene {
       .on('pointerdown', () => {
         this.scene.start('Menu')
       })
-    MAPS.forEach((map) =>
+    MAPS.forEach((map, index) => {
       this.add
         .image(
           this.width / 2 - 240 + 60 * map,
@@ -34,11 +34,24 @@ export default class extends Phaser.Scene {
         .setInteractive()
         .on('pointerdown', () => {
           window.music.stop()
-          window.music = this.sound.add('gameMusic')
+          window.music = this.sound.add('gameMusic', { loop: true })
           window.music.play()
           this.scene.start('Game', { levelNumber: map })
-        }),
-    )
+        })
+      this.add
+        .text(
+          this.width / 2 - 255 + 60 * (index + 1),
+          this.height / 2 + 45,
+          (index + 1).toString(),
+          {
+            fontSize: 20,
+            fontWeight: '500',
+            color: '#000',
+            align: 'center',
+          },
+        )
+        .setDepth(20)
+    })
     this.muteButton = this.add
       .image(this.width - 50, this.height - 50, 'mute')
       .setScale(0.5)

@@ -6,6 +6,11 @@ export class ObjectSprite extends Phaser.Physics.Arcade.Sprite {
     this.gid = object.gid
     this.name = NAMES[this.type][this.gid]
     this.scene.physics.world.enable(this)
+    this.exitSound = this.scene.sound.add('win', { volume: 2 })
+    this.hitSound = this.scene.sound.add('button', { volume: 0.5 })
+    this.playHitSound = () => this.hitSound.play()
+    this.debouncedPlayHitSound = debounce(this.playHitSound, 300, true)
+
     this.setCollideWorldBounds(true)
     this.isPressed = false
     this.setOrigin(0, 1)
@@ -42,6 +47,7 @@ export class ObjectSprite extends Phaser.Physics.Arcade.Sprite {
     }
 
     if (this.type === 'exit' && player.visible) {
+      this.exitSound.play()
       player.setVisible(false)
       this.scene.swap()
     }
@@ -59,6 +65,7 @@ export class ObjectSprite extends Phaser.Physics.Arcade.Sprite {
         return
       }
       this.isPressed = true
+      this.debouncedPlayHitSound()
       this.setFrame(this.frame.name + 60)
       this.scene.time.addEvent({
         delay: 200,
@@ -105,4 +112,20 @@ export const NAMES = {
   ladder: {
     [-1]: 'ladder',
   },
+}
+
+function debounce(func, wait, immediate) {
+  var timeout
+  return function () {
+    var context = this,
+      args = arguments
+    var later = function () {
+      timeout = null
+      if (!immediate) func.apply(context, args)
+    }
+    var callNow = immediate && !timeout
+    clearTimeout(timeout)
+    timeout = setTimeout(later, wait)
+    if (callNow) func.apply(context, args)
+  }
 }

@@ -4,9 +4,9 @@ const SPEEDS = {
   blue: 300,
 }
 const JUMPS = {
-  red: 350,
-  green: 300,
-  blue: 495,
+  red: 400,
+  green: 400,
+  blue: 600,
 }
 
 const TINTS = {
@@ -20,12 +20,13 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.scene = scene
     this.walk = this.walk.bind(this)
     this.climb = this.climb.bind(this)
+    this.jumpSound = this.scene.sound.add('jump', { volume: 2 })
     this.stop = this.stop.bind(this)
     this.action = this.action.bind(this)
     this.activate = this.activate.bind(this)
     this.scene.add.existing(this)
     this.scene.physics.world.enable(this)
-    this.body.setMaxVelocity(300, 495)
+    this.body.setMaxVelocity(300, 600)
 
     this.setCollideWorldBounds(true)
     this.body.useDamping = true
@@ -36,19 +37,25 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.name = object.name
     let frames
     if (this.type === 'red') {
+      this.setSize(58, 40)
+      this.setOffset(3, 21)
       frames = {
         walk: { start: 81, end: 82, frameRate: 4 },
         jump: { start: 83, end: 84, frameRate: 5 },
         idle: { start: 79, end: 80, frameRate: 2 },
       }
     } else if (this.type === 'green') {
+      this.setSize(58, 40)
+      this.setOffset(3, 21)
       frames = {
         walk: { start: 19, end: 22, frameRate: 10 },
         jump: { start: 23, end: 23, frameRate: 10 },
         idle: { start: 19, end: 20, frameRate: 2 },
       }
     } else if (this.type === 'blue') {
-      this.setScale(1.5)
+      this.setScale(1.3)
+      this.setSize(40, 40)
+      this.setOffset(10, 21)
       frames = {
         walk: { start: 51, end: 53, frameRate: 9 },
         jump: { start: 53, end: 53, frameRate: 5 },
@@ -80,8 +87,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       }),
       frameRate: frames.jump.frameRate,
     })
-    this.setSize(58, 40)
-    this.setOffset(3, 21)
+
     this.activate()
     this.deactivate()
     this.anims.play(`idle${this.type}`, true)
@@ -143,6 +149,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (this.body.onFloor() || this.body.touching.down) {
       this.anims.play(`jump${this.type}`, true)
       this.body.setVelocityY(-JUMPS[this.type])
+      this.jumpSound.play()
       if (this.type === 'blue') {
         this.body.setVelocityX(0)
       } else if (this.type === 'green') {
