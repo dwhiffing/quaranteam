@@ -1,6 +1,6 @@
 import InputService from '../services/input'
 import LevelService from '../services/level'
-import { NUM_LEVELS } from '../constants'
+import { MAPS } from '../constants'
 
 export default class extends Phaser.Scene {
   constructor() {
@@ -16,7 +16,7 @@ export default class extends Phaser.Scene {
   }
 
   create() {
-    const level = new LevelService(this, `map${this.levelNumber}`)
+    const level = new LevelService(this, `map${MAPS[this.levelNumber - 1]}`)
     this.level = level
     this.width = level.map.widthInPixels
     this.height = level.map.heightInPixels
@@ -68,7 +68,7 @@ export default class extends Phaser.Scene {
   }
 
   nextLevel() {
-    if (this.levelNumber >= NUM_LEVELS) return
+    if (this.levelNumber >= MAPS.length) return
     this.inputService.cleanup()
     this.scene.start('Game', {
       levelNumber: this.levelNumber + 1,

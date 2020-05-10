@@ -1,4 +1,4 @@
-import { NUM_LEVELS } from '../constants'
+import { MAPS } from '../constants'
 
 export default class extends Phaser.Scene {
   constructor() {
@@ -17,9 +17,9 @@ export default class extends Phaser.Scene {
         60,
       )
     })
-    for (let i = 1; i <= NUM_LEVELS; i++) {
-      this.load.tilemapTiledJSON(`map${i}`, `assets/maps/map${i}.json`)
-    }
+    MAPS.forEach((map) =>
+      this.load.tilemapTiledJSON(`map${map}`, `assets/maps/map${map}.json`),
+    )
     this.load.image('left', 'assets/images/left.png')
     this.load.image('up', 'assets/images/up.png')
     this.load.image('down', 'assets/images/down.png')

@@ -1,4 +1,4 @@
-import { NUM_LEVELS } from '../constants'
+import { MAPS } from '../constants'
 
 export default class extends Phaser.Scene {
   constructor() {
@@ -18,19 +18,19 @@ export default class extends Phaser.Scene {
       .on('pointerdown', () => {
         this.scene.start('Menu')
       })
-    for (let i = 1; i <= NUM_LEVELS; i++) {
+    MAPS.forEach((map) =>
       this.add
         .image(
-          this.width / 2 - 150 + 75 * i,
+          this.width / 2 - 150 + 75 * map,
           this.height / 2 + 50,
           'playButton',
         )
         .setScale(1)
         .setInteractive()
         .on('pointerdown', () => {
-          this.scene.start('Game', { levelNumber: i })
-        })
-    }
+          this.scene.start('Game', { levelNumber: map })
+        }),
+    )
     this.add
       .text(this.width / 2, this.height / 2 - 50, 'Levels', {
         fontSize: 60,

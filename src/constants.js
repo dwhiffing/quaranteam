@@ -1,1 +1,1 @@
-export const NUM_LEVELS = 3
+export const MAPS = [2, 1, 3]
