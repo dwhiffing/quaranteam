@@ -29,8 +29,7 @@ export default class extends Phaser.Scene {
     this.physics.add.overlap(level.players, level.pickups, this.overlap)
 
     this.cameras.main.setBounds(0, 0, this.width, this.height)
-    this.cameras.main.setBackgroundColor('#ccccff')
-    this.activePlayer = level.redPlayer
+    this.activePlayer = Phaser.Math.RND.pick(level.players.getChildren())
     this.cameras.main.setLerp(0.2, 0.2)
     this.activePlayer.activate()
 
