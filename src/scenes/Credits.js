@@ -27,7 +27,7 @@ export default class extends Phaser.Scene {
       .text(
         this.width / 2,
         this.height / 2,
-        'Use each of the characters to escape together. \nUse the onscreen controls or Arrows + Z and X to move around.',
+        'Swap between the characters and escape as each of them. \nUse the onscreen controls or Arrows + Z and X to move around.',
         {
           fontSize: 20,
           fontFamily: 'Sailec',
