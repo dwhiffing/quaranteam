@@ -62,12 +62,14 @@ export default class LevelService {
   }
 
   toggleTile(tile, button) {
-    tile.setCollision(false, false, false, false)
+    tile.collideLeft = false
+    tile.collideRight = false
     tile.alpha = 0.2
     this.scene.time.addEvent({
       delay: 200,
       callback: () => {
-        tile.setCollision(true, true, true, true)
+        tile.collideLeft = true
+        tile.collideRight = true
         tile.alpha = 1
       },
     })
