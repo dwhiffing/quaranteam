@@ -23,7 +23,10 @@ export default class LevelService {
       .getTilesWithinWorldXY(0, 0, 999999, 999999)
       .filter(
         (tile) =>
-          tile.index === 196 || tile.index === 226 || tile.index === 225,
+          tile.index === 195 ||
+          tile.index === 196 ||
+          tile.index === 226 ||
+          tile.index === 225,
       )
 
     this.objLayer = this.map.getObjectLayer('Objects')
@@ -50,6 +53,9 @@ export default class LevelService {
   toggleWalls(name) {
     this.togglableWalls.forEach((t) => {
       if (t.index === 225 && name === 'red') {
+        this.toggleTile(this.groundLayer.getTileAt(t.x, t.y))
+      }
+      if (t.index === 195 && name === 'any') {
         this.toggleTile(this.groundLayer.getTileAt(t.x, t.y))
       }
       if (t.index === 196 && name === 'green') {

@@ -4,9 +4,9 @@ const SPEEDS = {
   blue: 250,
 }
 const JUMPS = {
-  red: 550,
-  green: 550,
-  blue: 900,
+  red: 350,
+  green: 300,
+  blue: 495,
 }
 export class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, object) {
@@ -19,7 +19,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.activate = this.activate.bind(this)
     this.scene.add.existing(this)
     this.scene.physics.world.enable(this)
-    this.body.setMaxVelocity(600, 900)
+    this.body.setMaxVelocity(300, 495)
 
     this.setCollideWorldBounds(true)
     this.body.useDamping = true
@@ -113,7 +113,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       if (this.type === 'blue') {
         this.body.setVelocityX(0)
       } else if (this.type === 'green') {
-        this.body.setVelocityX(this.flipX ? -450 : 450)
+        this.body.setVelocityX(this.flipX ? -400 : 400)
         this.body.useDamping = false
       }
     }

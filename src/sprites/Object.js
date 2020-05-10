@@ -80,13 +80,15 @@ export const NAMES = {
     19: 'red',
   },
   button: {
-    [-1]: 'green',
+    [-1]: 'any',
+    75: 'any',
     76: 'green',
     106: 'blue',
     105: 'red',
   },
   locks: {
-    [-1]: 'green',
+    [-1]: 'any',
+    195: 'any',
     196: 'green',
     226: 'blue',
     225: 'red',
