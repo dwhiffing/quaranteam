@@ -21,8 +21,6 @@ export default class extends Phaser.Scene {
     this.width = level.map.widthInPixels
     this.height = level.map.heightInPixels
 
-    this.inputService = new InputService(this)
-
     this.physics.world.bounds.width = this.width
     this.physics.world.bounds.height = this.height
     this.physics.add.collider(level.pushers, level.groundLayer)
@@ -33,7 +31,10 @@ export default class extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, this.width, this.height)
     this.cameras.main.setBackgroundColor('#ccccff')
     this.activePlayer = level.redPlayer
+    this.cameras.main.setLerp(0.08, 0.08)
     this.activePlayer.activate()
+
+    this.inputService = new InputService(this)
   }
 
   swap() {

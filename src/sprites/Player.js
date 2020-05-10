@@ -80,7 +80,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   activate() {
     this.alpha = 1
     this.setDepth(2)
-    this.scene.cameras.main.startFollow(this)
+    const lastX = this.scene.cameras.main.scrollX
+    const lastY = this.scene.cameras.main.scrollY
+    this.scene.cameras.main.startFollow(this, true, 0.08, 0.08)
+    this.scene.cameras.main.scrollX = lastX
+    this.scene.cameras.main.scrollY = lastY
   }
   update() {
     this.body.useDamping =

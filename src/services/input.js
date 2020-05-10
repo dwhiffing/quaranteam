@@ -1,8 +1,8 @@
 export default class InputService {
   constructor(scene) {
     this.scene = scene
-    const DISTX = 75
-    const DISTY = 100
+    const DISTX = 50
+    const DISTY = 70
     const { height, width } = this.scene.cameras.main
     this.jump = this.jump.bind(this)
     this.restart = this.restart.bind(this)
@@ -15,13 +15,14 @@ export default class InputService {
     this.downDown = this.downDown.bind(this)
     this.direction = 0
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-    const makeButton = (x, y, key, callback, scale = 1) => {
+    const makeButton = (x, y, key, callback, scale = 0.7) => {
       if (!isMobile) return
       const image = this.scene.add.image(x, y, key)
       image
         .setScale(scale)
         .setInteractive()
         .setScrollFactor(0)
+        .setDepth(10)
         .on('pointerdown', callback)
       return image
     }
