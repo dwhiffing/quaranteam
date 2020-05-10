@@ -17,6 +17,21 @@ export class ObjectSprite extends Phaser.Physics.Arcade.Sprite {
         this.body.useDamping = true
         this.body.setDrag(0.8, 0.8)
       }
+      if (this.body && this.type === 'button') {
+        this.body.useDamping = true
+        this.setSize(45, 40)
+        this.setOffset(8, 20)
+      }
+      if (this.body && this.type === 'ladder') {
+        this.body.useDamping = true
+        this.setSize(22, 62)
+        this.setOffset(20, 0)
+      }
+      if (this.body && this.type === 'exit') {
+        this.body.useDamping = true
+        this.setSize(30, 30)
+        this.setOffset(17, 20)
+      }
     }, 0)
     this.overlap = this.overlap.bind(this)
   }

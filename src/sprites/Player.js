@@ -1,11 +1,11 @@
 const SPEEDS = {
-  red: 400,
-  green: 600,
-  blue: 500,
+  red: 200,
+  green: 300,
+  blue: 250,
 }
 const JUMPS = {
-  red: 600,
-  green: 600,
+  red: 550,
+  green: 550,
   blue: 900,
 }
 export class Player extends Phaser.Physics.Arcade.Sprite {
@@ -54,8 +54,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       }),
       frameRate: 4,
     })
-    this.setSize(40, 50)
-    this.setOffset(12, 11)
+    this.setSize(32, 50)
+    this.setOffset(16, 11)
   }
   walk(x) {
     const baseSpeed = SPEEDS[this.type]
@@ -108,7 +108,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       if (this.type === 'blue') {
         this.body.setVelocityX(0)
       } else if (this.type === 'green') {
-        this.body.setVelocityX(this.flipX ? -700 : 700)
+        this.body.setVelocityX(this.flipX ? -450 : 450)
         this.body.useDamping = false
       }
     }
