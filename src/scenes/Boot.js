@@ -29,6 +29,7 @@ export default class extends Phaser.Scene {
     this.load.image('playButton', 'assets/images/play.png')
     this.load.image('helpButton', 'assets/images/help.png')
     this.load.image('restart', 'assets/images/restart.png')
+    this.load.image('exit', 'assets/images/exit.png')
     this.load.spritesheet('tilemap', 'assets/images/tilemap.png', {
       frameWidth: 63,
       frameHeight: 63,

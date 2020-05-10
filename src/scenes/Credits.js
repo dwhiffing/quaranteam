@@ -11,7 +11,7 @@ export default class extends Phaser.Scene {
 
   create() {
     this.add
-      .image(20, 20, 'restart')
+      .image(20, 20, 'exit')
       .setScale(0.5)
       .setInteractive()
       .on('pointerdown', () => {

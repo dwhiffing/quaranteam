@@ -51,7 +51,8 @@ export default class InputService {
     isMobile && this.rightTouch.on('pointerup', this.keyUp)
     makeButton(width - DISTX, height - DISTY, 'jump', this.jump)
     makeButton(width - DISTX * 2.5, height - DISTY, 'swap', this.scene.swap)
-    makeButton(width - DISTX / 1.5, DISTY / 2, 'restart', this.restart)
+    makeButton(DISTX / 1.5, DISTY / 2, 'exit', this.exit)
+    makeButton(width - DISTX / 1.5, DISTY / 2, 'restart', this.restart, 0.5)
     this.cursors = this.scene.input.keyboard.createCursorKeys()
     this.spaceKey = this.scene.input.keyboard.addKey('SPACE')
     this.zKey = this.scene.input.keyboard.addKey('Z')
@@ -100,6 +101,10 @@ export default class InputService {
   }
 
   restart() {
+    this.scene.scene.start('Game', { levelNumber: this.scene.levelNumber })
+  }
+
+  exit() {
     this.scene.scene.start('Menu')
   }
 
