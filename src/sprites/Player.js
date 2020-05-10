@@ -1,7 +1,7 @@
 const SPEEDS = {
   red: 200,
   green: 300,
-  blue: 250,
+  blue: 300,
 }
 const JUMPS = {
   red: 350,
@@ -30,33 +30,55 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.name = object.name
     let frames
     if (this.type === 'red') {
-      frames = [86, 89, 79]
+      frames = {
+        walk: { start: 81, end: 82, frameRate: 4 },
+        jump: { start: 83, end: 84, frameRate: 5 },
+        idle: { start: 79, end: 80, frameRate: 2 },
+      }
     } else if (this.type === 'green') {
-      frames = [26, 29, 19]
+      frames = {
+        walk: { start: 19, end: 22, frameRate: 10 },
+        jump: { start: 23, end: 23, frameRate: 10 },
+        idle: { start: 19, end: 20, frameRate: 2 },
+      }
     } else if (this.type === 'blue') {
-      frames = [56, 59, 49]
+      this.setScale(1.5)
+      frames = {
+        walk: { start: 51, end: 53, frameRate: 9 },
+        jump: { start: 53, end: 53, frameRate: 5 },
+        idle: { start: 49, end: 50, frameRate: 2 },
+      }
     }
     this.scene.anims.create({
       key: `walk${this.type}`,
       frames: this.scene.anims.generateFrameNames('tilemap', {
-        start: frames[0],
-        end: frames[1],
+        start: frames.walk.start,
+        end: frames.walk.end,
       }),
-      frameRate: 4,
+      frameRate: frames.walk.frameRate,
       repeat: -1,
     })
     this.scene.anims.create({
       key: `idle${this.type}`,
       frames: this.scene.anims.generateFrameNames('tilemap', {
-        start: frames[2],
-        end: frames[2],
+        start: frames.idle.start,
+        end: frames.idle.end,
       }),
-      frameRate: 4,
+      frameRate: frames.idle.frameRate,
     })
-    this.setSize(58, 50)
-    this.setOffset(3, 11)
+    this.scene.anims.create({
+      key: `jump${this.type}`,
+      frames: this.scene.anims.generateFrameNames('tilemap', {
+        start: frames.jump.start,
+        end: frames.jump.end,
+      }),
+      frameRate: frames.jump.frameRate,
+    })
+    this.setSize(58, 40)
+    this.setOffset(3, 21)
     this.activate()
     this.deactivate()
+    this.anims.play(`idle${this.type}`, true)
   }
   walk(x) {
     const baseSpeed = SPEEDS[this.type]
@@ -65,6 +87,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         ? baseSpeed
         : baseSpeed * 0.3
 
+    if (this.body.onFloor() || this.body.touching.down) {
+      this.anims.play(`walk${this.type}`, true)
+    }
     if (
       this.body.onFloor() ||
       this.body.touching.down ||
@@ -72,11 +97,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     ) {
       this.body.setVelocityX(x * speed)
     }
-    this.anims.play(`walk${this.type}`, true)
     this.flipX = x < 0
   }
   stop() {
-    this.anims.play(`idle${this.type}`, true)
+    if (this.body.onFloor() || this.body.touching.down) {
+      this.anims.play(`idle${this.type}`, true)
+    }
   }
   deactivate() {
     this.alpha = 0.5
@@ -108,7 +134,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
   action() {
     if (this.body.onFloor() || this.body.touching.down) {
-      this.anims.play(`idle${this.type}`, true)
+      this.anims.play(`jump${this.type}`, true)
       this.body.setVelocityY(-JUMPS[this.type])
       if (this.type === 'blue') {
         this.body.setVelocityX(0)

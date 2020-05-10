@@ -20,7 +20,7 @@ const game = new Phaser.Game({
     arcade: {
       fps: 60,
       gravity: { y: 500 },
-      debug: true,
+      // debug: true,
     },
   },
   scene: Object.values(scenes),
