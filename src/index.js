@@ -5,8 +5,9 @@ const game = new Phaser.Game({
   transparent: true,
   type: Phaser.AUTO,
   parent: 'phaser-example',
-  width: 1920,
-  height: 1080,
+  width: 960,
+  height: 540,
+  pixelArt: true,
   input: {
     activePointers: 3,
   },

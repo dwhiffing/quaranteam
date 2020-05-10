@@ -1,6 +1,6 @@
 export class ObjectSprite extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, object) {
-    super(scene, object.x, object.y, 'objects')
+    super(scene, object.x, object.y, 'tilemap')
     this.scene = scene
     this.type = object.type
     this.gid = object.gid
@@ -10,9 +10,7 @@ export class ObjectSprite extends Phaser.Physics.Arcade.Sprite {
     this.isPressed = false
     this.setOrigin(0, 1)
     this.scene.add.existing(this)
-    const frameSet = FRAMES[this.type]
-    const frame = frameSet[this.gid] || frameSet[-1]
-    this.setFrame(frame)
+    this.setFrame(this.gid - 1)
 
     setTimeout(() => {
       if (this.body && this.type === 'crate') {
@@ -41,12 +39,12 @@ export class ObjectSprite extends Phaser.Physics.Arcade.Sprite {
         return
       }
       this.isPressed = true
-      this.setFrame(this.frame.name + 3)
+      this.setFrame(this.frame.name + 60)
       this.scene.time.addEvent({
         delay: 200,
         callback: () => {
           this.isPressed = false
-          this.setFrame(this.frame.name - 3)
+          this.setFrame(this.frame.name - 60)
         },
       })
       callback(this)
@@ -54,33 +52,7 @@ export class ObjectSprite extends Phaser.Physics.Arcade.Sprite {
   }
 }
 
-export const FRAMES = {
-  coin: {
-    [-1]: 0,
-    17: 0,
-    18: 1,
-    19: 2,
-  },
-  button: {
-    [-1]: 8,
-    25: 8,
-    26: 9,
-    27: 10,
-  },
-  crate: {
-    [-1]: 3,
-    23: 6,
-    21: 4,
-    22: 5,
-  },
-  exit: {
-    [-1]: 14,
-  },
-  ladder: {
-    [-1]: 7,
-  },
-}
-const NAMES = {
+export const NAMES = {
   coin: {
     [-1]: 'green',
     17: 'green',
@@ -89,15 +61,21 @@ const NAMES = {
   },
   button: {
     [-1]: 'green',
-    25: 'green',
-    26: 'blue',
-    27: 'red',
+    76: 'green',
+    106: 'blue',
+    105: 'red',
+  },
+  locks: {
+    [-1]: 'green',
+    196: 'green',
+    226: 'blue',
+    225: 'red',
   },
   crate: {
     [-1]: 'crate',
-    23: 'red',
-    21: 'green',
-    22: 'blue',
+    281: 'red',
+    283: 'green',
+    282: 'blue',
   },
   exit: {
     [-1]: 'exit',

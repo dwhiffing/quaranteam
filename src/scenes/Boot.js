@@ -27,13 +27,9 @@ export default class extends Phaser.Scene {
     this.load.image('jump', 'assets/images/jump.png')
     this.load.image('swap', 'assets/images/swap.png')
     this.load.image('restart', 'assets/images/restart.png')
-    this.load.spritesheet('tiles', 'assets/images/tiles.png', {
-      frameWidth: 70,
-      frameHeight: 70,
-    })
-    this.load.spritesheet('objects', 'assets/images/objects.png', {
-      frameWidth: 70,
-      frameHeight: 70,
+    this.load.spritesheet('tilemap', 'assets/images/tilemap.png', {
+      frameWidth: 63,
+      frameHeight: 63,
     })
     this.load.atlas(
       'player',

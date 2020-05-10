@@ -1,5 +1,5 @@
 import { Player } from '../sprites/Player'
-import { ObjectSprite, FRAMES } from '../sprites/Object'
+import { ObjectSprite, NAMES } from '../sprites/Object'
 
 export default class LevelService {
   constructor(scene, key) {
@@ -8,7 +8,7 @@ export default class LevelService {
     this.toggleTile = this.toggleTile.bind(this)
     this.map = scene.make.tilemap({ key })
 
-    const groundTiles = this.map.addTilesetImage('tiles')
+    const groundTiles = this.map.addTilesetImage('tilemap')
     this.groundLayer = this.map.createDynamicLayer('World', groundTiles, 0, 0)
     this.groundLayer.setCollisionByExclusion([-1])
 
@@ -21,7 +21,10 @@ export default class LevelService {
 
     this.togglableWalls = this.groundLayer
       .getTilesWithinWorldXY(0, 0, 999999, 999999)
-      .filter((tile) => tile.index >= 5 && tile.index <= 7)
+      .filter(
+        (tile) =>
+          tile.index === 196 || tile.index === 226 || tile.index === 225,
+      )
 
     this.objLayer = this.map.getObjectLayer('Objects')
     this.objLayer.objects.forEach((object) => {
@@ -29,7 +32,7 @@ export default class LevelService {
         this[`${object.name}Player`] = new Player(scene, object)
       }
 
-      Object.keys(FRAMES).forEach((type) => {
+      Object.keys(NAMES).forEach((type) => {
         if (object.type === type) {
           this[`${type}s`].add(new ObjectSprite(scene, object))
         }
@@ -46,13 +49,13 @@ export default class LevelService {
 
   toggleWalls(button) {
     this.togglableWalls.forEach((t) => {
-      if (t.index === 5 && button.name === 'red') {
+      if (t.index === 225 && button.name === 'red') {
         this.toggleTile(this.groundLayer.getTileAt(t.x, t.y), button)
       }
-      if (t.index === 6 && button.name === 'green') {
+      if (t.index === 196 && button.name === 'green') {
         this.toggleTile(this.groundLayer.getTileAt(t.x, t.y), button)
       }
-      if (t.index === 7 && button.name === 'blue') {
+      if (t.index === 226 && button.name === 'blue') {
         this.toggleTile(this.groundLayer.getTileAt(t.x, t.y), button)
       }
     })
