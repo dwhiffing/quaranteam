@@ -31,7 +31,7 @@ export default class extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, this.width, this.height)
     this.cameras.main.setBackgroundColor('#ccccff')
     this.activePlayer = level.redPlayer
-    this.cameras.main.setLerp(0.08, 0.08)
+    this.cameras.main.setLerp(0.2, 0.2)
     this.activePlayer.activate()
 
     this.inputService = new InputService(this)

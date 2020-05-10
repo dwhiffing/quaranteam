@@ -26,20 +26,17 @@ export default class extends Phaser.Scene {
     this.load.image('right', 'assets/images/right.png')
     this.load.image('jump', 'assets/images/jump.png')
     this.load.image('swap', 'assets/images/swap.png')
+    this.load.image('playButton', 'assets/images/play.png')
+    this.load.image('helpButton', 'assets/images/help.png')
     this.load.image('restart', 'assets/images/restart.png')
     this.load.spritesheet('tilemap', 'assets/images/tilemap.png', {
       frameWidth: 63,
       frameHeight: 63,
     })
-    this.load.atlas(
-      'player',
-      'assets/images/player.png',
-      'assets/images/player.json',
-    )
 
     this.load.on('complete', () => {
       progress.destroy()
-      this.scene.start('Game')
+      this.scene.start('Menu')
     })
   }
 }

@@ -82,7 +82,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.setDepth(2)
     const lastX = this.scene.cameras.main.scrollX
     const lastY = this.scene.cameras.main.scrollY
-    this.scene.cameras.main.startFollow(this, true, 0.08, 0.08)
+    this.scene.cameras.main.startFollow(this, true, 0.2, 0.2)
     this.scene.cameras.main.scrollX = lastX
     this.scene.cameras.main.scrollY = lastY
   }
@@ -102,7 +102,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.body.setVelocityY(direction === 2 ? -250 : 250)
   }
   action() {
-    if (this.body.onFloor()) {
+    if (this.body.onFloor() || this.body.touching.down) {
       this.anims.play('idle', true)
       this.body.setVelocityY(-JUMPS[this.type])
       if (this.type === 'blue') {

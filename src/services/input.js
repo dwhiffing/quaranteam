@@ -100,7 +100,7 @@ export default class InputService {
   }
 
   restart() {
-    this.scene.scene.start('Game', { levelNumber: this.scene.levelNumber })
+    this.scene.scene.start('Menu')
   }
 
   cleanup() {
