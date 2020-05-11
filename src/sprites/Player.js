@@ -58,7 +58,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.setOffset(10, 21)
       frames = {
         walk: { start: 51, end: 53, frameRate: 9 },
-        jump: { start: 53, end: 53, frameRate: 5 },
+        jump: { start: 54, end: 57, frameRate: 9 },
         idle: { start: 49, end: 50, frameRate: 2 },
       }
     }
